@@ -51,7 +51,7 @@ const addImage = () => {
             setTitle('');
             setDescription('');
             setIsPublic(false);
-            fileInputRef.current.value = ''; 
+            fileInputRef.current.value = null; 
         }
     };
 
