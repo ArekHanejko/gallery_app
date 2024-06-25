@@ -35,7 +35,8 @@ const addImage = () => {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Cache-Control': 'no-cache'
-                }
+                },
+              timeout: 10000
             });
             console.log(response);
             setMessage('Zdjęcie dodane');
