@@ -41,9 +41,8 @@ const addImage = () => {
             console.log(response);
             setMessage('Zdjęcie dodane');
         } catch(error){  
-            //console.log(error);
-            //console.log(error.data);   
-            setMessage('Błąd podczas wstawiania pliku.');          
+            console.log(error);   
+            //setMessage('Błąd podczas wstawiania pliku.');          
         }
         finally {
             setIsLoading(false);
@@ -51,6 +50,7 @@ const addImage = () => {
             setTitle('');
             setDescription('');
             setIsPublic(false);
+            setMessage('Zdjęcie dodane');
             fileInputRef.current.value = null; 
         }
     };
