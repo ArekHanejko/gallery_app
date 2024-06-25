@@ -23,7 +23,9 @@ const addImage = () => {
         e.preventDefault();
         setIsLoading(true);
         setMessage('');
+      
         try {
+            const instance = axios.create()
             const formData = new FormData();
             formData.append('file', file);
             formData.append('id_user', userId); 
@@ -31,7 +33,7 @@ const addImage = () => {
             formData.append('description', description);
             formData.append('is_public', isPublic);
  
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/createImage?_=${new Date().getTime()}`, formData, {
+            const response = await instance.post(`${process.env.NEXT_PUBLIC_API_URL}/api/createImage?_=${new Date().getTime()}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
