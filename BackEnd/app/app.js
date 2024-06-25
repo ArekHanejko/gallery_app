@@ -40,7 +40,13 @@ app.use(bodyParser.json({limit: '100mb'}));
 
 app.use(express.static('public'));
 
-app.use(cors());
+app.use(cors(
+    {
+        origin: ["https://galleryapp.onwebapp.io/"],
+        methods: ["POST","GET","PUT","DELETE"],
+        credentials: true
+    }
+));
 
 mongoose.connect(config.databaseUrl, {
     useNewUrlParser: true
