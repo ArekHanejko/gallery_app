@@ -1,20 +1,19 @@
-"use client";
-import React, { useState, useEffect } from 'react';
+"use client"
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import Image from "next/image";
 import { useUser } from '../userContext'; 
 import withAuth from '../withAuth';
-const addImage = () => {
 
+const addImage = () => {
     const [file, setFile] = useState(null);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [isPublic, setIsPublic] = useState(false);
     const [message, setMessage] = useState('');
-    const { userName, userId } = useUser();
+    const { userId } = useUser();
     const [isLoading, setIsLoading] = useState(false);
-  
-        
+    const fileInputRef = useRef(null); 
 
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
@@ -37,30 +36,28 @@ const addImage = () => {
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            console.log(response);
+            
             setMessage('Zdjęcie dodane');
         } catch(error){  
             console.log(error);
             console.log(error.response.data);   
             setMessage('Błąd podczas wstawiania pliku.');          
         }
-        finally{
-            setFile(null);
+        finally {
+            setIsLoading(false);
+            setFile(null); 
             setTitle('');
             setDescription('');
             setIsPublic(false);
-            setIsLoading(false); 
+            fileInputRef.current.value = ''; 
         }
     };
 
     return (
-         <div>
-            
-          
+        <div>
             <form onSubmit={handleSubmit} className='w-[90%] lg:w-[50%] mx-auto'>
-            <p className='my-8 text-[24px] text-myCol text-red text-center lg:text-left'>Dodaj zdjęcie</p>
-            <hr className='bg-myCol mb-8 h-0.5'/>
-                
+                <p className='my-8 text-[24px] text-myCol text-red text-center lg:text-left'>Dodaj zdjęcie</p>
+                <hr className='bg-myCol mb-8 h-0.5'/>
                 
                 <div className=''>
                     <label htmlFor="title">Tytuł:</label><br/>
@@ -76,7 +73,7 @@ const addImage = () => {
                 </div>
                 <div className=''>
                     <label htmlFor="file">Wybierz zdjęcie:</label><br/>
-                    <input type="file" id="file" accept="image/*" onChange={handleFileChange} className=" "  required/>
+                    <input ref={fileInputRef} type="file" id="file" accept="image/*" onChange={handleFileChange} className=" "  required/>
                 </div><br/>
                 <div className="flex items-center">
                     <button type="submit" className='bg-myCol p-2 rounded-md text-myBg shadow-lg'>Dodaj</button>
@@ -89,10 +86,7 @@ const addImage = () => {
                 </div>
                 {message && <p className='absolute text-red lg:mt-[102px]'>{message}</p>}
                 <Image src='/addImageLogo.png' width='200' height='200' alt='addImage logo' priority className='mt-[-300px] ml-[50%] hidden lg:block'/>
-                
             </form>
-            
-            
         </div>
     );
 };
