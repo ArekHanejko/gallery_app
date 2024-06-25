@@ -31,7 +31,7 @@ const addImage = () => {
             formData.append('description', description);
             formData.append('is_public', isPublic);
  
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/createImage`, formData, {
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/createImage?_=${new Date().getTime()}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
