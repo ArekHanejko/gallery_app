@@ -113,7 +113,8 @@ export default function Home() {
     } catch (error) {
       console.error('Error:', error);
     }finally{
-      
+      showMore(bigImgActive);
+      setCommentText('');
       setIsLoadingAddComment(false);
     }
   };
