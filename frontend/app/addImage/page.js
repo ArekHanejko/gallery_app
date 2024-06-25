@@ -4,7 +4,7 @@ import axios from 'axios';
 import Image from "next/image";
 import { useUser } from '../userContext'; 
 import withAuth from '../withAuth';
-
+ 
 const addImage = () => {
     const [file, setFile] = useState(null);
     const [title, setTitle] = useState('');
