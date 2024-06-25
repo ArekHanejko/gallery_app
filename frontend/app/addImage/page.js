@@ -14,7 +14,7 @@ const addImage = () => {
     const { userId } = useUser();
     const [isLoading, setIsLoading] = useState(false);
     const fileInputRef = useRef(null); 
-
+ 
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
     };
