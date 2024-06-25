@@ -20,38 +20,43 @@ const addImage = () => {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsLoading(true);
-        setMessage('');
-        try {
-            const formData = new FormData();
-            formData.append('file', file);
-            formData.append('id_user', userId); 
-            formData.append('title', title);
-            formData.append('description', description);
-            formData.append('is_public', isPublic);
+    e.preventDefault();
+    setIsLoading(true);
+    setMessage('');
 
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/createImage`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
-            
-            setMessage('Zdjęcie dodane');
-        } catch(error){  
-            console.log(error);
-            console.log(error.response.data);   
-            setMessage('Błąd podczas wstawiania pliku.');          
+    try {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('id_user', userId); 
+        formData.append('title', title);
+        formData.append('description', description);
+        formData.append('is_public', isPublic);
+
+        const requestOptions = {
+            method: 'POST',
+            body: formData,
+        };
+
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/createImage`, requestOptions);
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || 'Błąd podczas wstawiania pliku.');
         }
-        finally {
-            setIsLoading(false);
-            setFile(null); 
-            setTitle('');
-            setDescription('');
-            setIsPublic(false);
-            fileInputRef.current.value = ''; 
-        }
-    };
+
+        setMessage('Zdjęcie dodane');
+    } catch(error) {
+        console.error('Error:', error);
+        setMessage(error.message || 'Błąd podczas wstawiania pliku.');
+    } finally {
+        setIsLoading(false);
+        setFile(null);
+        setTitle('');
+        setDescription('');
+        setIsPublic(false);
+        fileInputRef.current.value = '';
+    }
+};
 
     return (
         <div>
