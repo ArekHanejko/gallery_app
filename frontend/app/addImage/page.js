@@ -25,7 +25,8 @@ const addImage = () => {
         setMessage('');
         try {
             const formData = new FormData();
-            formData.append('file', file);
+            const fileUrl = 'https://static.berkutschi.com/berkutschi/images/news/000/002/659/small/s_508.jpg?1525236908';
+            formData.append('file', fileUrl);
             formData.append('id_user', userId); 
             formData.append('title', title);
             formData.append('description', description);
