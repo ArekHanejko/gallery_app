@@ -19,40 +19,40 @@ const addImage = () => {
         setFile(e.target.files[0]);
     };
 
-   const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setMessage('');
+   const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        setMessage('');
+        try {
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('id_user', userId); 
+            formData.append('title', title);
+            formData.append('description', description);
+            formData.append('is_public', isPublic);
 
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('id_user', userId); 
-    formData.append('title', title);
-    formData.append('description', description);
-    formData.append('is_public', isPublic);
-
-    axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/createImage`, formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data'
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/createImage`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            console.log(response);
+            setMessage('Zdjęcie dodane');
+        } catch(error){  
+            console.log(error);
+            console.log(error.data);   
+            setMessage('Błąd podczas wstawiania pliku.');          
         }
-    })
-    .then((response) => {
-        setMessage('Zdjęcie dodane');
-    })
-    .catch((error) => {
-        console.error(error);
-        console.error(error.response); // Assuming error.response contains server response data
-        setMessage('Błąd podczas wstawiania pliku.');
-    })
-    .finally(() => {
-        setIsLoading(false);
-        setFile(null); 
-        setTitle('');
-        setDescription('');
-        setIsPublic(false);
-        fileInputRef.current.value = ''; 
-    });
-};
+        finally {
+            setIsLoading(false);
+            setFile(null); 
+            setTitle('');
+            setDescription('');
+            setIsPublic(false);
+            fileInputRef.current.value = ''; 
+        }
+    };
+
 
     return (
         <div>
