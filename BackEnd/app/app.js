@@ -31,20 +31,16 @@ import * as ld from "lodash/collection.js";
 const storageS = multer.memoryStorage();
 const upload =  multer({ storage: storageS});
 
-const corsOptions = {
-    origin: '*',  // Umożliwia dostęp z dowolnej domeny. Zmien to na konkretną domenę, jeśli to konieczne.
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-  };
+
 app.use(express.static(__dirname + '/public'));
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json({limit: '10mb'}));
+app.use(bodyParser.json({limit: '100mb'}));
 
 app.use(express.static('public'));
 
-app.use(cors(corsOptions));
+//app.use(cors());
 
 mongoose.connect(config.databaseUrl, {
     useNewUrlParser: true
