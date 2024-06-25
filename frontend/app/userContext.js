@@ -26,7 +26,7 @@ export const UserProvider = ({ children }) => {
         setUserToken(userToken);
         localStorage.setItem('userName', JSON.stringify(userName));
         localStorage.setItem('userId', JSON.stringify(userId));
-        Cookies.set('userToken', userToken, { expires: 1 ,secure: true, sameSite: 'none'});
+        Cookies.set('userToken', userToken, { expires: 1 ,secure: false, sameSite: 'none'});
     };
 
     const logout = () => {
