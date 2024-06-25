@@ -33,7 +33,6 @@ const addImage = () => {
  
             const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/createImage`, formData, {
                 headers: {
-                    'Accept': 'application/json',
                     'Content-Type': 'multipart/form-data'
                 }
             });
