@@ -40,7 +40,7 @@ app.use(bodyParser.json({limit: '100mb'}));
 
 app.use(express.static('public'));
 
-//app.use(cors());
+app.use(cors());
 
 mongoose.connect(config.databaseUrl, {
     useNewUrlParser: true
