@@ -11,7 +11,7 @@ const addImage = () => {
     const [description, setDescription] = useState('');
     const [isPublic, setIsPublic] = useState(false);
     const [message, setMessage] = useState('');
-    const { userId } = useUser();
+   // const { userId } = useUser();
     const [isLoading, setIsLoading] = useState(false);
     const fileInputRef = useRef(null); 
  
@@ -26,7 +26,7 @@ const addImage = () => {
         try {
             const formData = new FormData();
             formData.append('file', file);
-            formData.append('id_user', userId); 
+            formData.append('id_user', '54654'); 
             formData.append('title', title);
             formData.append('description', description);
             formData.append('is_public', isPublic);
@@ -92,4 +92,4 @@ const addImage = () => {
     );
 };
 
-export default withAuth(addImage);
+export default addImage;
