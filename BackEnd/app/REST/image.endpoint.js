@@ -109,9 +109,7 @@ const ImageEndpoint = (router) => {
             } else {
                 res.status(500).json({ error: 'Error creating Image entry 1' });
             }
-        } catch (error) {
-            res.status(500).json({ error: 'Error creating Image entry' });
-        }
+        } 
     });
 };
 export default ImageEndpoint;
