@@ -19,7 +19,7 @@ const storageS = multer.memoryStorage();
 const upload = multer({ storage: storageS });
 
 const corsOptions = {
-    origin: '*', // Zmień na konkretną domenę w środowisku produkcyjnym.
+    origin: 'https://galleryapp.onwebapp.io', 
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
 };
@@ -34,7 +34,7 @@ app.use(cors(corsOptions));
 // Połączenie z bazą danych MongoDB
 mongoose.connect(config.databaseUrl, {
     useNewUrlParser: true,
-    useUnifiedTopology: true, // Dodaj tę opcję, aby uniknąć ostrzeżeń deprecjacji
+    useUnifiedTopology: true,
 }, (error) => {
     if (error) {
         console.error('Błąd połączenia z bazą danych:', error);
