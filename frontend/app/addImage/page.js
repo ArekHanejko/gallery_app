@@ -25,36 +25,29 @@ const addImage = () => {
         setMessage('');
       
         try {
-            const instance = axios.create()
-            const formData = new FormData();
-            formData.append('file', file);
-            formData.append('id_user', userId); 
-            formData.append('title', title);
-            formData.append('description', description);
-            formData.append('is_public', isPublic);
- 
-            const response = await instance.post(`${process.env.NEXT_PUBLIC_API_URL}/api/createImage?_=${new Date().getTime()}`, formData, {
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/createImage`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             });
             console.log(response);
             setMessage('Zdjęcie dodane');
-        } catch(error){  
-            console.log(error);   
+        } catch (error) {  
+            console.log(error);
             if (error.response) {
-            console.log("Error response data", error.response.data);
+                console.log(error.response.data);
+            }
+            setMessage('Błąd podczas wstawiania pliku.');
         }
-            //setMessage('Błąd podczas wstawiania pliku.');          
-        }
-        finally {
-            setIsLoading(false);
-            setFile(null); 
-            setTitle('');
-            setDescription('');
-            setIsPublic(false);
-            setMessage('Zdjęcie dodane');
-            fileInputRef.current.value = null; 
+
+        // Reset state and input field regardless of success or failure
+        setIsLoading(false);
+        setFile(null); 
+        setTitle('');
+        setDescription('');
+        setIsPublic(false);
+        if (fileInputRef.current) {
+            fileInputRef.current.value = ''; 
         }
     };
 
