@@ -65,7 +65,7 @@ const addImage = () => {
                     <input type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)} className="w-[100%] h-[48px] text-[24px] lg:w-[400px] border border-myCol rounded bg-formInputBgCol" required/>
                 </div>
                 <div className=''>
-                    <label htmlFor="description">Opis:</label><br/>
+                    <label htmlFor="description">Opis zdj:</label><br/>
                     <textarea id="description" value={description} onChange={(e) => setDescription(e.target.value)} className="w-[100%] h-[48px] text-[24px] lg:w-[400px] border border-myCol rounded bg-formInputBgCol" required />
                 </div>
                 <div className=''>
