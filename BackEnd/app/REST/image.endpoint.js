@@ -105,7 +105,7 @@ const ImageEndpoint = (router) => {
             const ImageEntry = await businessContainer.getImageManager().createNew(temp);
 
             if (ImageEntry) {
-               // res.status(201).send('Image '+req.file.originalname+' added');
+                res.status(201).send('Image  added');
             } else {
                 res.status(500).json({ error: 'Error creating Image entry 1' });
             }
