@@ -1,4 +1,3 @@
-
 import bodyParser from "body-parser";
 import config from "./config.js";
 import cors from 'cors';
@@ -16,47 +15,37 @@ import * as fs from "fs";
 import * as path from "path";
 import * as ld from "lodash/collection.js";
 
-
-/*const storageT = multer.diskStorage({
-    destination: function (req, file, cb) {
-
-        cb(null, 'uploads/')
-    },
-    filename: function (req, file, cb) {
-
-        let lasts  = file.originalname.lastIndexOf('.');
-        cb(null, file.originalname.substring(0,lasts)+'(jjj)'+'ok'+file.originalname.substring(lasts))
-    }
-});*/
 const storageS = multer.memoryStorage();
-const upload =  multer({ storage: storageS});
+const upload = multer({ storage: storageS });
 
+const corsOptions = {
+    origin: '*', // Zmień na konkretną domenę w środowisku produkcyjnym.
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+};
 
 app.use(express.static(__dirname + '/public'));
-
 app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json({limit: '100mb'}));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({ limit: '10mb' }));
 
-app.use(express.static('public'));
+app.use(cors(corsOptions));
 
-app.use(cors(
-    {
-        origin: ["https://galleryapp.onwebapp.io/"],
-        methods: ["POST","GET","PUT","DELETE"],
-        credentials: true
-    }
-));
-
+// Połączenie z bazą danych MongoDB
 mongoose.connect(config.databaseUrl, {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true, // Dodaj tę opcję, aby uniknąć ostrzeżeń deprecjacji
 }, (error) => {
     if (error) {
-        console.error(error);
+        console.error('Błąd połączenia z bazą danych:', error);
+    } else {
+        console.info('Połączenie z bazą danych zostało nawiązane');
     }
-    else {
-        console.info('Connect with database established');
-    }
+});
+
+// Obsługa błędów połączenia z bazą danych
+mongoose.connection.on('error', (err) => {
+    console.error('Błąd połączenia z MongoDB:', err);
 });
 
 process.on('SIGINT', () => {
@@ -66,14 +55,16 @@ process.on('SIGINT', () => {
     });
 });
 
-
+// Obsługa tras aplikacji
 routes(app);
 
+// Obsługa nieznanych tras - zwracanie pliku index.html
 app.get('/*', function (req, res) {
-  res.sendFile(__dirname + '/public/index.html');
+    res.sendFile(__dirname + '/public/index.html');
 });
 
-
+// Nasłuchiwanie na porcie zdefiniowanym w konfiguracji
 app.listen(config.port, function () {
-  console.info(`Server is running at ${config.port}`)
+    console.info(`Serwer działa na porcie ${config.port}`)
 });
+
