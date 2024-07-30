@@ -34,7 +34,8 @@ const addImage = () => {
             const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/createImage`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
-                }
+                },
+            withCredentials: true,
             });
             console.log(response);
             setMessage('Zdjęcie dodane');
