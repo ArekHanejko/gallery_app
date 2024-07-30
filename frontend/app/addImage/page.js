@@ -19,38 +19,54 @@ const addImage = () => {
         setFile(e.target.files[0]);
     };
 
-   const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsLoading(true);
-        setMessage('');
-      
-        try {
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/createImage`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
-            console.log(response);
-            setMessage('Zdjęcie dodane');
-        } catch (error) {  
-            console.log(error);
-            if (error.response) {
-                console.log(error.response.data);
-            }
-            setMessage('Błąd podczas wstawiania pliku.');
-        }
+     const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setMessage("");
 
-        // Reset state and input field regardless of success or failure
-        setIsLoading(false);
-        setFile(null); 
-        setTitle('');
-        setDescription('');
-        setIsPublic(false);
-        if (fileInputRef.current) {
-            fileInputRef.current.value = ''; 
-        }
-    };
+    if (!file) {
+      setMessage("Please select a file to upload.");
+      setIsLoading(false);
+      return;
+    }
 
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("isPublic", isPublic);
+    formData.append("userId", userId);
+
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/createImage`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        setMessage("Image uploaded successfully!");
+      } else {
+        setMessage("Failed to upload image.");
+      }
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      setMessage("An error occurred while uploading the image.");
+    } finally {
+      setIsLoading(false);
+      setFile(null);
+      setTitle("");
+      setDescription("");
+      setIsPublic(false);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = null;
+      }
+    }
+  };
 
     return (
         <div>
