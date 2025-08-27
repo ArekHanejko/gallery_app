@@ -26,4 +26,4 @@ function UserImages() {
   );
 }
 
-export default withAuth(UserImages);
+export default UserImages;
