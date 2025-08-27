@@ -15,32 +15,45 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-        if (password === passwordRepeat) {
-            try {
-                const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/create`, {
-                    name,
-                    email,
-                    password
-                });
 
-                setEmail('');
-                setName('');
-                setPassword('');
-                setPasswordRepeat('');
-                setMsgSuccess('Konto zostało utworzone.');
-                setMsgFail('');
-                
-            } catch (error) {
-                console.error('Error:', error);
-            }
-            finally{
-                setIsLoading(false);   
-            }
-        } else {
-            setMsgSuccess('');
-            setIsLoading(false);  
-            setMsgFail('Hasła nie są takie same !');
+        if (password.length < 8) {
+            setMsgFail('Hasło musi zawierać co najmniej 8 znaków.');
+            setIsLoading(false);
+            return;
         }
+
+        if (password !== passwordRepeat) {
+            setMsgFail('Hasła nie są takie same!');
+            setIsLoading(false);
+            return;
+        }
+
+        try {
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/create`, {
+                name,
+                email,
+                password
+            });
+
+            setEmail('');
+            setName('');
+            setPassword('');
+            setPasswordRepeat('');
+            setMsgSuccess('Konto zostało utworzone.');
+            setMsgFail('');
+        } catch (error) {
+            if (error.response?.status === 400) {
+                setMsgFail(error.response.data.message || "Istnieje już użytkownik o podanej nazwie.");
+            } else {
+                console.error("Nieoczekiwany błąd:", error);
+            }
+        } finally {
+            setIsLoading(false);
+        }
+            
+            
+            
+            
     };
 
     return (

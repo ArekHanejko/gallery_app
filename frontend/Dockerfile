@@ -1,12 +1,9 @@
-FROM node:lts AS build
+FROM alpine:latest AS build
 RUN mkdir -p /app
 WORKDIR /app
-COPY /package*.json ./
-RUN npm i
-RUN npm install merge2
-RUN npm install js-cookie
 COPY . .
-RUN npm run build
-EXPOSE 80
-CMD ["npm", "run", "start"]
+RUN apk add nodejs npm
+RUN npm install
+EXPOSE 3000
+CMD ["npm", "run", "dev"]
 
