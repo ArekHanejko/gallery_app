@@ -1,6 +1,6 @@
 "use client"
 import GalleryPage from "./components/GalleryPage";
-import withAuth from "./withAuth";
+import withAuth from "./withoutAuth";
 import axios from "axios";
 
 function UserImages() {
@@ -26,4 +26,4 @@ function UserImages() {
   );
 }
 
-export default UserImages;
+export default withoutAuth(UserImages);
