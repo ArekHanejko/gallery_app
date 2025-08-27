@@ -1,6 +1,6 @@
 "use client"
 import GalleryPage from "./components/GalleryPage";
-import withAuth from "./withoutAuth";
+import withoutAuth from "./withoutAuth";
 import axios from "axios";
 
 function UserImages() {
