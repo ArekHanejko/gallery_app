@@ -45,7 +45,7 @@ const CommentEndpoint = (router) => {
             const CommentEntry = await businessContainer.getCommentManager().createNewOrUpdate(temp);
 
             if (CommentEntry) {
-                res.status(201).send('Comment added');
+                res.status(201).json('Comment added');
             } else {
                 res.status(500).json({ error: 'Error creating Comment entry 1' });
             }
