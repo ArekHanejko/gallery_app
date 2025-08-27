@@ -3,11 +3,11 @@ import GalleryPage from "./components/GalleryPage";
 import withoutAuth from "./withoutAuth";
 import axios from "axios";
 
-function UserImages() {
-  const fetchUserImages = async (userId) => {
+function Images() {
+  const fetchImages = async () => {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/Image/by-owner/${userId}`
+        `${process.env.NEXT_PUBLIC_API_URL}/api/Images`
       );
       return response.data;
     } catch (error) {
@@ -20,10 +20,10 @@ function UserImages() {
 
   return (
     <GalleryPage
-      fetchImages={fetchUserImages}
+      fetchImages={fetchImages}
       isUserGallery={false}
     />
   );
 }
 
-export default withoutAuth(UserImages);
+export default Images;
