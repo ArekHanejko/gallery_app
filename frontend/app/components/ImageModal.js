@@ -17,13 +17,20 @@ export default function ImageModal({
 }) {
   return (
     <div className="absolute lg:fixed left-0  right-0 mx-auto top-0 lg:top-[50px] flex w-[100%] lg:w-[80%] flex-col lg:flex-row bg-white shadow-xl rounded-2xl z-50 pt-12 lg:pt-0 ">
-      
+      <Image
+                  src="/closeIcon.png"
+                  width="32"
+                  height="32"
+                  alt="close card logo"
+                  className=" right-0 block absolute mt-6 mr-6 hover:cursor-pointer z-50"
+                  onClick={() => closeMore()}
+                />
       <div
         onClick={() => closeMore()}
         className="fixed top-0 left-0 h-[100vh] w-full bg-black opacity-80 hover:cursor-pointer"
       ></div>
 
-      <div className="w-full content-left z-50 bg-white lg:rounded-l-2xl">
+      <div className="w-full content-left z-40 bg-white lg:rounded-l-2xl">
         <div>
         
           <p className="text-center text-[24px] text-myCol font-bold pb-8 pt-6">
