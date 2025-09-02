@@ -15,14 +15,6 @@ export default function CommentsSection({
 }) {
   return (
     <div className="lg:w-1/2 w-1/1  z-50 bg-white rounded-b-2xl lg:rounded-r-2xl lg:rounded-l-none relative ">
-      <Image
-                  src="/closeIcon.png"
-                  width="32"
-                  height="32"
-                  alt="close card logo"
-                  className=" right-0 block absolute mt-6 mr-6 hover:cursor-pointer z-50"
-                  onClick={() => closeMore()}
-                />
       <div>
         <p className="text-center  text-myCol text-[24px] pt-6">Komentarze</p>
         <br />
