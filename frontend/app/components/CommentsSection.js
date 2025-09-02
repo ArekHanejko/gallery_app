@@ -14,7 +14,7 @@ export default function CommentsSection({
   closeMore,
 }) {
   return (
-    <div className="lg:w-1/2 w-1/1  z-50 bg-white rounded-b-2xl lg:rounded-r-2xl lg:rounded-l-none relative ">
+    <div className="lg:w-1/2 w-1/1  z-40 bg-white rounded-b-2xl lg:rounded-r-2xl lg:rounded-l-none relative ">
       <div>
         <p className="text-center  text-myCol text-[24px] pt-6">Komentarze</p>
         <br />
