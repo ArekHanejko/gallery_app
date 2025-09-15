@@ -4,7 +4,6 @@ import axios from 'axios';
 import { useUser } from '../userContext';
 import { useRouter } from 'next/navigation';
 import withoutAuth from '../withoutAuth';
-//var signIn = false;
 
 const login = () => {
     const { login } = useUser();
@@ -21,13 +20,11 @@ const login = () => {
         try {
             const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/auth`, {login: username, password: password});
             const userData = response.data;
-            //console.log(userData);
             login(username,userData.userid, userData.token);
 
             setUsername('');
             setPassword('');
             setMsgFail('');
-            //signIn = true;
             router.push('/');
         } catch (error) {
             if (error.response?.status === 401 || error.response?.status === 404) {
@@ -44,7 +41,6 @@ const login = () => {
         }
     };
 
-    /*if(signIn === true){/*Funkcjonalność wylogowania się}*/
 
     return (
         <>
