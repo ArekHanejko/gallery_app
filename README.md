@@ -7,6 +7,7 @@ A web application created as a student project, designed for logged-in users to 
 **Demo**: https://gallery-app-8nhf.vercel.app/
 
 **Test user**
+
 **Login: user**
 
 **Password: user**
