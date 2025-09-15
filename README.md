@@ -1,4 +1,4 @@
-#Galeria ZI
+# Galeria ZI
 
 Aplikacja internetowa stworzona w ramach projektu studenckiego, służąca do wstawiania zdjęć i obrazków zalogowanych użytkowników, oraz przęglądania zdjęć innych użytkowników oznaczonych jako publiczne. Możliwość dodawania komentarzy do zdjęć, oraz usuwania dodanych przez użytkownika.
 
