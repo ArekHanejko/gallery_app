@@ -15,7 +15,6 @@ export default function GalleryPage({ fetchImages, isUserGallery = false }) {
   const [comments, setComments] = useState([]);
   const { userName, userId } = useUser();
 
-  // ---------------- pobieranie zdjęć ----------------
   useEffect(() => {
     const loadImages = async () => {
       try {
@@ -35,7 +34,7 @@ export default function GalleryPage({ fetchImages, isUserGallery = false }) {
         setAllImages(convertedImages.filter(Boolean).reverse());
       } catch (error) {
         console.error("Błąd podczas wczytywania zdjęć:", error);
-        setAllImages([]); // fallback
+        setAllImages([]); 
       } finally {
         setLoading(false);
       }
@@ -44,7 +43,6 @@ export default function GalleryPage({ fetchImages, isUserGallery = false }) {
     loadImages();
   }, [userId, fetchImages]);
 
-  // ---------------- komentarze ----------------
   const showMore = async (image) => {
     setBigImgActive(image);
     setIsLoadingComments(true);
@@ -57,7 +55,7 @@ export default function GalleryPage({ fetchImages, isUserGallery = false }) {
       setComments(response.data);
     } catch (error) {
       console.error("Błąd podczas pobierania komentarzy:", error);
-      setComments([]); // fallback
+      setComments([]);
     } finally {
       setIsLoadingComments(false);
     }
@@ -102,7 +100,7 @@ export default function GalleryPage({ fetchImages, isUserGallery = false }) {
         date: formattedDate,
       });
 
-      showMore(bigImgActive); // odśwież komentarze
+      showMore(bigImgActive); 
       setCommentText("");
     } catch (error) {
       console.error("Błąd podczas dodawania komentarza:", error);
@@ -118,7 +116,6 @@ export default function GalleryPage({ fetchImages, isUserGallery = false }) {
     try {
       await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/deleteImage/${imageId}`);
       
-      // Usuń zdjęcie z galerii w stanie
       setAllImages((prevImages) => prevImages.filter((img) => img._id !== imageId));
   
       console.log("Zdjęcie usunięte pomyślnie");
@@ -127,10 +124,9 @@ export default function GalleryPage({ fetchImages, isUserGallery = false }) {
     }
   };
 
-  // ---------------- render ----------------
   return (
     <div className="relative">
-      {/* Loader */}
+      
       {loading ? (
         <svg
           aria-hidden="true"
@@ -152,7 +148,7 @@ export default function GalleryPage({ fetchImages, isUserGallery = false }) {
         <span></span>
       )}
 
-      {/* Modal */}
+    
       {bigImgActive && (
         <ImageModal
           bigImgActive={bigImgActive}
@@ -169,7 +165,7 @@ export default function GalleryPage({ fetchImages, isUserGallery = false }) {
         />
       )}
 
-      {/* Lista zdjęć */}
+     
       <div className="flex flex-wrap justify-around lg:w-3/4 w-100 mx-auto mt-16 relative">
         {allImages.map((image, index) => (
           <ImageCard
