@@ -5,3 +5,7 @@ Aplikacja internetowa stworzona w ramach projektu studenckiego, służąca do ws
 A web application created as a student project, designed for logged-in users to upload photos and images, as well as browse photos of other users that are marked as public. Users can add comments to photos and delete the ones they have uploaded.
 
 **Demo**: https://gallery-app-8nhf.vercel.app/
+
+**Test user**
+**Login: user**
+**Password: user**
