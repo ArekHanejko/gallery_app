@@ -8,4 +8,5 @@ A web application created as a student project, designed for logged-in users to 
 
 **Test user**
 **Login: user**
+
 **Password: user**
