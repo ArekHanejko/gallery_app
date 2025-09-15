@@ -12,7 +12,7 @@ function Images() {
       return response.data;
     } catch (error) {
       console.error("Błąd podczas pobierania zdjęć użytkownika:", error);
-      return []; // fallback
+      return [];
     }
   };
 
