@@ -6,7 +6,7 @@ export default function ImageCard({ image, showMore, index, isUserImage, deleteU
   return (
     <div
       key={index}
-      className="md:w-[350px] md:h-[400px] w-[100%] bg-black m-8 text-center grid rounded-2xl relative overflow-hidden shadow-2xl grid justify-items-center"
+      className="md:w-[400px] md:h-[300px] w-[100%] bg-black m-8 text-center grid rounded-2xl relative overflow-hidden shadow-2xl grid justify-items-center"
     >
       <img
         src={image.imageData}
