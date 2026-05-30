@@ -8,6 +8,6 @@ A web application created as a student project, designed for logged-in users to 
 
 **Test user**
 --------------
-**Login: teset**
+**Login: test**
 
 **Password: zaq1@WSX**
